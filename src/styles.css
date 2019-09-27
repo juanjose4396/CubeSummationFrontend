@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+section {
+    padding: 150px 0;
+}
+input.ng-invalid {
+    border-color: red;
+}
+input.ng-valid {
+    border-color: lightgreen;
+}

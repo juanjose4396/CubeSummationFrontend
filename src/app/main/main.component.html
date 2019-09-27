@@ -1,0 +1,73 @@
+<form>
+  <section id="about">
+    <div class="container">
+        <div *ngIf="alertMessage" class="alert alert-danger" role="alert">
+            {{alertMessage}}
+        </div>
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>T (the number of test-case)</h2>
+          <input
+            name="inputT"
+            type="number"
+            class="form-control"
+            aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-lg"
+            [(ngModel)]="numberOfTestCase"
+            (keyup.enter)="onBlurNumberOfTestCase()"
+            (blur)="onBlurNumberOfTestCase()"
+            required
+          />
+        </div>
+        <div *ngFor="let testCase of testsCase; let i = index">
+          <div class="col-lg-8 mx-auto mt-5">
+            <div class="row">
+              <div class="col-6">
+                <h2>N (Defines the N * N * N matrix)</h2>
+                <input
+                  name="inputN{{ i }}"
+                  type="number"
+                  class="form-control"
+                  [(ngModel)]="testCase.sizeMatriz"
+                  required
+                />
+              </div>
+              <div class="col-6">
+                <h2>M defines the number of operations</h2>
+                <input
+                  name="input{{ i }}"
+                  type="number"
+                  class="form-control"
+                  [(ngModel)]="testCase.numberOfOperations"
+                  (keyup.enter)="
+                    onBlurNumberOperations(i, testCase.numberOfOperations)
+                  "
+                  (blur)="
+                    onBlurNumberOperations(i, testCase.numberOfOperations)
+                  "
+                  required
+                />
+              </div>
+              <div class="col-12 mt-2">
+                <h4 *ngIf="testCase.operations && testCase.operations.length">
+                  Operations:
+                </h4>
+                <input name="inputO{{j}}" *ngFor="let operation of testCase.operations; let j = index" class="form-control" [(ngModel)]="operation.statement"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w-100 text-center mt-4">
+      <button class="btn btn-lg btn-primary" (click)="solucionar()">solucionar</button>
+    </div>
+  </section>
+
+  <section id="services" class="bg-light" class="pt-0">
+    <h2 class=" ml-2">Solution:</h2>
+    <hr>
+    <h3 class="ml-2" *ngFor="let res of resultSolution">{{res}}</h3> <br>
+  </section>
+
+</form>
